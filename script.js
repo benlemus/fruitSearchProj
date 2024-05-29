@@ -86,21 +86,60 @@ const fruit = [
 function search(str) {
   let results = [];
 
-  // TODO
+  //   makes fruit list lowercase
+  for (let i = 0; i < fruit.length; i++) {
+    fruit[i] = fruit[i].toLowerCase();
+  }
 
-  return results;
+  // filters each char passed through searchHandler()
+  //   pushes to result arr
+  const fruitMap = fruit.filter((val) => {
+    return val.indexOf(str.toLowerCase()) !== -1;
+  });
+
+  results.push(fruitMap);
+
+  showSuggestions(results, str);
 }
 
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
+let chars = "";
+
 function searchHandler(e) {
-  // TODO
+  let inputKey = e.key;
+
+  //   adds each key to chars string
+  //   if key = backspace, will updat chars to what is in input box
+  if (alphabet.indexOf(inputKey.toLowerCase()) !== -1) {
+    chars += inputKey;
+  } else if (inputKey === "Backspace") {
+    chars = input.value;
+  }
+  search(chars);
 }
 
 function showSuggestions(results, inputVal) {
-  // TODO
+  const [result] = results;
+
+  if (inputVal === "") {
+  } else {
+    result.forEach((val) => {
+      const newLi = document.createElement("li");
+      let valUpper = val[0].toUpperCase();
+      let valRest = val.slice(1);
+      let valFull = valUpper + valRest;
+      newLi.innerHTML = valFull;
+      suggestions.appendChild(newLi);
+      input.addEventListener("keyup", () => suggestions.removeChild(newLi));
+    });
+  }
 }
 
 function useSuggestion(e) {
-  // TODO
+  const suggestionsDiv = document.querySelector(".suggestions");
+  targetVal = e.target.innerText;
+  input.value = targetVal;
+  suggestionsDiv.removeChild(suggestions);
 }
 
 input.addEventListener("keyup", searchHandler);
