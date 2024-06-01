@@ -124,21 +124,31 @@ function showSuggestions(results, inputVal) {
   if (inputVal === "") {
   } else {
     result.forEach((val) => {
+      // bolds in search
+      const regex = new RegExp(inputVal, "gi");
+      newVal = val.replace(regex, `<strong>$&</strong>`);
+      console.log(newVal);
+      // creates li and appends to reult list
       const newLi = document.createElement("li");
-      let valUpper = val[0].toUpperCase();
-      let valRest = val.slice(1);
-      let valFull = valUpper + valRest;
-      newLi.innerHTML = valFull;
+      // sets first letter to uppercase
+      // let valUpper = newVal[0].toUpperCase();
+      // let valRest = newVal.slice(1);
+      // let valFull = valUpper + valRest;
+      newLi.innerHTML = newVal;
       suggestions.appendChild(newLi);
+      // removes result list when another char is added
       input.addEventListener("keyup", () => suggestions.removeChild(newLi));
     });
   }
 }
 
+// fills input box with suggestion when selected
 function useSuggestion(e) {
   const suggestionsDiv = document.querySelector(".suggestions");
+  // replaces text in input box with target text
   targetVal = e.target.innerText;
   input.value = targetVal;
+  // removes suggestions that no longer match
   suggestionsDiv.removeChild(suggestions);
 }
 

@@ -16,16 +16,10 @@ body {
 }
 
 .search-container {
-  /* background-color: aqua; */
   margin-top: 35vh;
 }
 
-/* .search-container input,
-.search-container .suggestions {
-} */
-
 .search-container input {
-  /* background-color: aqua; */
   font-size: 1.2rem;
   border: none;
   border-bottom: 3px solid #ff8300;
@@ -49,11 +43,6 @@ ul {
   border-bottom-right-radius: 20px;
 }
 
-/* FOR BOLDED TEXT WHEN INPUT MATCHES CHAR IN RESULT */
-ul.has-suggestions {
-  /* TODO */
-}
-
 ul li {
   font-size: 1rem;
   padding: 13px 5px;
@@ -62,6 +51,3 @@ ul li {
 ul li:hover {
   background-color: #ff8300;
 }
-
-/* input {
-} */
